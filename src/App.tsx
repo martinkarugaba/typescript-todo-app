@@ -28,7 +28,7 @@ const App: React.FC = () => {
         setTodo={setTodo}
         handleAdd={handleAdd}
       />
-      <TodoList />
+      <TodoList todos={todos} setTodos={setTodos} />
     </div>
   );
 };
