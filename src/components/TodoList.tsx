@@ -8,8 +8,7 @@ interface Props {
 
 const TodoList: React.FC<Props> = ({ todos, setTodos }: Props) => {
   return (
-    <>
-      {todos.map((todo) => {
+    <div className="flex flex-col justify-start items-center mt-6">  {todos.map((todo) => {
         return (
           <SingleTodo
             todo={todo}
@@ -19,7 +18,7 @@ const TodoList: React.FC<Props> = ({ todos, setTodos }: Props) => {
           />
         );
       })}
-    </>
+    </div>
   );
 };
 export default TodoList;

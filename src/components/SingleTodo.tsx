@@ -13,18 +13,34 @@ const SingleTodo: React.FC<Props> = ({
   todos,
   setTodos,
 }: Props) => {
+  const handleDone = (id: number) => {
+    setTodos(
+      todos.map((todo) =>
+        todo.id === id ? { ...todo, isDone: !todo.isDone } : todo
+      )
+    );
+  };
+
+  const handleDelete = (id: number) => {
+    setTodos(todos.filter((todo) => todo.id !== id));
+  };
+
   return (
-    <form>
-      <div>
-        <p>{todo.todo}</p>
-        <div>
+    <form className="mt-4">
+      <div className="w-[500px] flex justify-between items-center py-2 rounded border">
+        {todo.isDone ? (
+          <s className="text-white line-through">{todo.todo}</s>
+        ) : (
+          <p className="text-white">{todo.todo}</p>
+        )}
+        <div className="w-[80px] flex justify-between items-center">
           <span>
             <AiFillEdit />
           </span>
-          <span>
+          <span onClick={() => handleDelete(todo.id)}>
             <AiFillDelete />
           </span>
-          <span>
+          <span onClick={() => handleDone(todo.id)}>
             <MdDone />
           </span>
         </div>
