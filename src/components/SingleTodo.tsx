@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { Todo } from "../model";
 import { AiFillEdit, AiFillDelete } from "react-icons/ai";
-import { MdDone } from "react-icons/md";
+import { MdDone, MdClose } from "react-icons/md";
 
 interface Props {
   todo: Todo;
@@ -60,9 +60,16 @@ const SingleTodo: React.FC<Props> = ({
             />
             <button
               type="submit"
-              className="mr-4 px-3 py-1 rounded bg-lime-600 text-white text-sm"
+              className="mr-2 px-3 py-1 rounded bg-lime-600 text-white text-base"
             >
-              Done
+              <MdDone />
+            </button>
+            <button
+              type="submit"
+              className="px-3 py-1 rounded bg-rose-600 text-white text-base"
+              onClick={() => setEdit(false)}
+            >
+              <MdClose />
             </button>
           </>
         ) : todo.isDone ? (
@@ -71,7 +78,13 @@ const SingleTodo: React.FC<Props> = ({
           <p className="text-white">{todo.todo}</p>
         )}
 
-        <div className="w-[80px] flex justify-between items-center">
+        <div
+          className={
+            !edit
+              ? "w-[80px] flex justify-between items-center"
+              : "hidden"
+          }
+        >
           {/* edit button */}
           <span
             className="text-white text-xl cursor-pointer"
