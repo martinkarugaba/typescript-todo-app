@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Todo } from "../model";
 import { AiFillEdit, AiFillDelete } from "react-icons/ai";
 import { MdDone } from "react-icons/md";
@@ -39,6 +39,13 @@ const SingleTodo: React.FC<Props> = ({
     setEdit(false);
   };
 
+  // The type of the ref comes from the element the ref is pointing at
+  const inputRef = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    inputRef.current?.focus();
+  }, [edit]);
+
   return (
     <form className="mt-4" onSubmit={(e) => handleEdit(e, todo.id)}>
       <div className="w-[500px] flex justify-between items-center p-2 px-3 rounded bg-orange-400">
@@ -48,9 +55,13 @@ const SingleTodo: React.FC<Props> = ({
               type="text"
               value={editTodo}
               onChange={(e) => setEditTodo(e.target.value)}
-              className="flex-1 rounded px-3 py-1  outline-none"
+              className="flex-1 rounded px-3 py-1 mr-2 outline-none"
+              ref={inputRef}
             />
-            <button type="submit" className="mr-4">
+            <button
+              type="submit"
+              className="mr-4 px-3 py-1 rounded bg-lime-600 text-white text-sm"
+            >
               Done
             </button>
           </>
